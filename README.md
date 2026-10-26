@@ -1,0 +1,1 @@
+# Atividade_CRUD_Redis_Supabase
