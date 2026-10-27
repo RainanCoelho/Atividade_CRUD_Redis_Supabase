@@ -20,7 +20,25 @@ Python, Streamlit (interface), Supabase (banco de dados) e Redis (cache).
 pip install streamlit supabase redis pandas
 ```
 
-Coloque a URL e a chave do Supabase e os dados de conexão do Redis no arquivo `Atividade_Supabase_Redis.py`. Depois rode:
+No SQL Editor do Supabase, crie as tabelas:
+
+```sql
+create table lojas (
+  id bigint generated always as identity primary key,
+  nome text not null,
+  descricao text
+);
+
+create table produtos (
+  id bigint generated always as identity primary key,
+  loja_id bigint not null references lojas (id) on delete cascade,
+  nome text not null,
+  quantidade integer not null default 0,
+  preco numeric(10, 2) not null default 0
+);
+```
+
+Depois, coloque a URL e a chave do Supabase e os dados de conexão do Redis no arquivo `Atividade_Supabase_Redis.py`. Depois rode:
 
 ```bash
 streamlit run interface_streamlit.py
